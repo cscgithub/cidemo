@@ -14,7 +14,7 @@
       "InstanceType":{
          "Description":"WebServer EC2 instance type",
          "Type":"String",
-         "Default":"m1.micro",
+         "Default":"t1.micro",
          "ConstraintDescription":"Must be a valid EC2 instance type."
       },
       "PrivateBucket":{
