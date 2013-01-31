@@ -140,7 +140,7 @@
 
 			"files" : {
 	          "/usr/share/tomcat6/webapps/jenkins.war" : {
-		        "source" : "http://mirrors.jenkins-ci.org/war/1.472/jenkins.war",
+		        "source" : "http://mirrors.jenkins-ci.org/war/1.500/jenkins.war",
 		        "mode"   : "000500",
 		        "owner"  : "tomcat",
 		        "group"  : "tomcat"
@@ -267,7 +267,7 @@
 		  "# Install Jenkins Plugins\n",
 		  "wget -P /usr/share/tomcat6/.jenkins/plugins/ http://updates.jenkins-ci.org/download/plugins/git/1.1.16/git.hpi\n",
 		  "wget -P /usr/share/tomcat6/.jenkins/plugins/ http://updates.jenkins-ci.org/download/plugins/s3/0.2.0/s3.hpi\n",
-		  "wget -P /usr/share/tomcat6/.jenkins/plugins/ http://updates.jenkins-ci.org/download/plugins/jenkins-cloudformation-plugin/0.9/jenkins-cloudformation-plugin.hpi\n",
+		  "wget -P /usr/share/tomcat6/.jenkins/plugins/ https://s3-ap-southeast-2.amazonaws.com/jenkins-public/jenkins-cloudformation-plugin-custom.hpi\n",
 		  "wget -P /usr/share/tomcat6/.jenkins/plugins/ http://updates.jenkins-ci.org/download/plugins/build-pipeline-plugin/1.2.3/build-pipeline-plugin.hpi\n",
 		  "wget -P /usr/share/tomcat6/.jenkins/plugins/ http://updates.jenkins-ci.org/download/plugins/github/1.2/github.hpi\n",
 		  "wget -P /usr/share/tomcat6/.jenkins/plugins/ http://updates.jenkins-ci.org/download/plugins/dashboard-view/2.2/dashboard-view.hpi\n",
@@ -312,6 +312,8 @@
 		  "# Tomcat Setup\n",
 		  "chown -R tomcat:tomcat /usr/share/tomcat6/\n",
 		  "service tomcat6 start\n",
+		  "chkconfig --add tomcat6\n",
+		  "chkconfig tomcat6 on\n",
 
 		  "/opt/aws/bin/cfn-signal", " -e 0", " '", { "Ref" : "WaitHandle" }, "'","\n",
 
