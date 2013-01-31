@@ -271,6 +271,7 @@
 		  "wget -P /usr/share/tomcat6/.jenkins/plugins/ http://updates.jenkins-ci.org/download/plugins/build-pipeline-plugin/1.2.3/build-pipeline-plugin.hpi\n",
 		  "wget -P /usr/share/tomcat6/.jenkins/plugins/ http://updates.jenkins-ci.org/download/plugins/github/1.2/github.hpi\n",
 		  "wget -P /usr/share/tomcat6/.jenkins/plugins/ http://updates.jenkins-ci.org/download/plugins/dashboard-view/2.2/dashboard-view.hpi\n",
+		  "wget -P /usr/share/tomcat6/.jenkins/plugins/ https://s3-ap-southeast-2.amazonaws.com/jenkins-public/performance.hpi\n",
 
 		  "# Install Bundler\n",
 		  "gem install bundler\n",
@@ -314,6 +315,12 @@
 		  "service tomcat6 start\n",
 		  "chkconfig --add tomcat6\n",
 		  "chkconfig tomcat6 on\n",
+
+		  "# JMeter Setup\n",
+		  "wget -P /var/tmp/apache-jmeter-2.9.tgz http://apache.mirror.uber.com.au//jmeter/binaries/apache-jmeter-2.9.tgz\n",
+		  "cd /usr/share\n",
+		  "tar xvzf /var/tmp/apache-jmeter-2.9.tgz\n",
+		  "rm /var/tmp/apache-jmeter-2.9.tgz\n",
 
 		  "/opt/aws/bin/cfn-signal", " -e 0", " '", { "Ref" : "WaitHandle" }, "'","\n",
 

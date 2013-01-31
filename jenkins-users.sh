@@ -24,6 +24,6 @@ chown -R lukea:lukea /home/lukea/.ssh
 useradd dannyb -p $1$ZwNWVZTH$uxNA9LObmaYKWEpPN8v/P0 -m
 usermod -G wheel dannyb
 mkdir /home/dannyb/.ssh
-echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSa03xL6A44HnbwxjpvWuzZR9jW1nte25sHhyTqABOgYJCYicyricVxD0Jti14GF6i3klAzyEqaBNebW4MEkrT0iiHQ+gME8Hxf/izJGukJL4rZaY/vUQrR0C9UpW9wbADhXeNvuzX5h7tBYbVe+/5akH1ZOCHuM2EwE8kgoeDPV3WZZYUgcziEn4G6kM12NGuONBS98B1E2ray8lG6Q1fNFnxxKv5UlBbhJZl85Hs5n0TCaQHD7FD3/+hlFNHC3J9uW3hefBk8jCDfL0PS5kjFT44NxC2P52mvsVbmew212z/1O3INMSA39WGlzpOr0nzfqFHL6zGuupNvlbp/cgz dbrain@pixies.local" >> /home/bent/.ssh/authorized_keys2
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSa03xL6A44HnbwxjpvWuzZR9jW1nte25sHhyTqABOgYJCYicyricVxD0Jti14GF6i3klAzyEqaBNebW4MEkrT0iiHQ+gME8Hxf/izJGukJL4rZaY/vUQrR0C9UpW9wbADhXeNvuzX5h7tBYbVe+/5akH1ZOCHuM2EwE8kgoeDPV3WZZYUgcziEn4G6kM12NGuONBS98B1E2ray8lG6Q1fNFnxxKv5UlBbhJZl85Hs5n0TCaQHD7FD3/+hlFNHC3J9uW3hefBk8jCDfL0PS5kjFT44NxC2P52mvsVbmew212z/1O3INMSA39WGlzpOr0nzfqFHL6zGuupNvlbp/cgz dbrain@pixies.local" >> /home/dannyb/.ssh/authorized_keys2
 chmod 600 /home/dannyb/.ssh/authorized_keys2
 chown -R dannyb:dannyb /home/dannyb/.ssh
