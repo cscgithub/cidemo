@@ -387,11 +387,14 @@
                         "# Tomcat Setup\n",
                         "chown -R tomcat:tomcat /usr/share/tomcat6/\n",
                         "service tomcat6 start\n",
+                        "chkconfig --add tomcat6\n",
+                        "chkconfig tomcat6 on\n",
+                        
                         "curl -X PUT -H 'Content-Type:' --data-binary '{\"Status\" : \"SUCCESS\",",
                                                            "\"Reason\" : \"The application cidemo is ready\",",
                                                            "\"UniqueId\" : \"cidemo\",",
                                                            "\"Data\" : \"Done\"}' ",
-                                                           "\"", {"Ref" : "WaitHandle"},"\"\n",                                                         
+                                                           "\"", {"Ref" : "WaitHandle"},"\"\n",
                         "date > /home/ec2-user/stoptime"
                      ]
                   ]

@@ -4,3 +4,6 @@ export SCALE_UP_ARN=`as-put-scaling-policy CIDemoScaleUp --region ap-southeast-2
 mon-put-metric-alarm CIDemoHighCPU --region ap-southeast-2 --comparison-operator GreaterThanThreshold --evaluation-periods 1 --metric-name CPUUtilization --namespace "AWS/EC2" --period 60 --statistic Average --threshold 70 --alarm-actions $SCALE_UP_ARN --dimensions "AutoScalingGroupName=CIDemoASG"
 export SCALE_DOWN_ARN=`as-put-scaling-policy CIDemoScaleDown --region ap-southeast-2 --auto-scaling-group CIDemoASG --adjustment=-1 --type ChangeInCapacity  --cooldown 60`
 mon-put-metric-alarm CIDemoLowCPU --region ap-southeast-2 --comparison-operator LessThanThreshold --evaluation-periods 1 --metric-name CPUUtilization --namespace "AWS/EC2" --period 60 --statistic Average --threshold 40 --alarm-actions $SCALE_DOWN_ARN --dimensions "AutoScalingGroupName=CIDemoASG"
+
+# Set key name
+# Set instance name
