@@ -56,8 +56,8 @@
           </elementProp>
           <stringProp name="HTTPSampler.domain">cidemo-lb-1725401499.ap-southeast-2.elb.amazonaws.com</stringProp>
           <stringProp name="HTTPSampler.port">80</stringProp>
-          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout">10000</stringProp>
+          <stringProp name="HTTPSampler.response_timeout">30000</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
           <stringProp name="HTTPSampler.path">/demo/spring/person/edit</stringProp>
