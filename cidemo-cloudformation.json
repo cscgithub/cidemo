@@ -22,6 +22,12 @@
          "Type":"String",
          "Default":"cidemo-private",
          "ConstraintDescription":"Must be a valid S3 Bucket"
+      },
+      "InstanceName":{
+         "Description":"Name for the cidemo instance",
+         "Type":"String",
+         "Default":"cidemo",
+         "ConstraintDescription":"Can contain only alphanumeric characters, spaces, dashes and underscores."
       }
    },
    "Mappings":{
@@ -346,7 +352,7 @@
             "Tags":[
                {
                   "Key":"Name",
-                  "Value":"cidemo"
+                  "Value": { "Ref": "InstanceName" }
                }
             ],
             "UserData":{
