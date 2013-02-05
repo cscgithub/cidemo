@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>
-	Hello world! - 
+	Hello world! - ${buildNumber}
 </h1>
 ${controllerMessage}<br/>
 <br/>
