@@ -1,5 +1,18 @@
-export INSTANCE_ID=`ec2-describe-instances --region ap-southeast-2 --filter "tag-key=aws:cloudformation:stack-name" --filter "tag-value=$1" | awk '/INSTANCE/{print $2}'`
-export IMAGE_ID=`ec2-create-image --region ap-southeast-2 -n $1 -d "Image for build $1" i-328cbf08 | awk '/IMAGE/{print $2}'`
+export COUNTER=0
+export INSTANCE_ID=""
+while [ -z "$INSTANCE_ID" ]; do
+	if [ "$COUNTER" -gt 24 ]; then
+		echo "Quitting after 25 attempts"
+		exit 1
+	else
+	  	sleep 5s
+	  	echo "Checking for instance availability"
+	  	INSTANCE_ID=`ec2-describe-instances --region ap-southeast-2 --filter "tag-key=aws:cloudformation:stack-name" --filter "tag-value=$1" --filter "instance-state-name=running" | awk '/INSTANCE/{print $2}'`
+	  	let COUNTER=COUNTER+1
+    fi
+done
+
+export IMAGE_ID=`ec2-create-image --region ap-southeast-2 -n $1 -d "Image for build $1" $INSTANCE_ID | awk '/IMAGE/{print $2}'`
 
 as-create-launch-config $1-lc --region ap-southeast-2 --image-id $IMAGE_ID --instance-type t1.micro --key lukeaaus --group cidemo
 as-create-auto-scaling-group $1-asg --region ap-southeast-2 --launch-configuration $1-lc --availability-zones ap-southeast-2b --min-size 1 --max-size 10 --desired-capacity 1 --load-balancers cidemo-lb --tag "k=Name, v=$1, p=true"
