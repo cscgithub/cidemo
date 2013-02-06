@@ -37,3 +37,4 @@ export SCALE_UP_ARN=`as-put-scaling-policy $1-test-ScaleUp --region ap-southeast
 mon-put-metric-alarm $1-test-HighCPU --region ap-southeast-2 --comparison-operator GreaterThanThreshold --evaluation-periods 1 --metric-name CPUUtilization --namespace "AWS/EC2" --period 60 --statistic Average --threshold 70 --alarm-actions $SCALE_UP_ARN --dimensions "AutoScalingGroupName=$1-test-asg"
 export SCALE_DOWN_ARN=`as-put-scaling-policy $1-test-ScaleDown --region ap-southeast-2 --auto-scaling-group $1-test-asg --adjustment=-1 --type ChangeInCapacity --cooldown 60`
 mon-put-metric-alarm $1-test-LowCPU --region ap-southeast-2 --comparison-operator LessThanThreshold --evaluation-periods 1 --metric-name CPUUtilization --namespace "AWS/EC2" --period 60 --statistic Average --threshold 40 --alarm-actions $SCALE_DOWN_ARN --dimensions "AutoScalingGroupName=$1-test-asg"
+as-execute-policy $1-test-ScaleUp --auto-scaling-group $1-test-asg --region ap-southeast-2 --no-honor-cooldown
