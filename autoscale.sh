@@ -14,10 +14,17 @@ done
 
 export IMAGE_ID=`ec2-create-image --region ap-southeast-2 -n $1 -d "Image for build $1" $INSTANCE_ID | awk '/IMAGE/{print $2}'`
 export IMAGE_AVAILABLE="false"
+COUNTER=0
 while [ "$IMAGE_AVAILABLE" != "true" ]; do
-	sleep 5s
-	echo "Waiting for image to become available"
-	IMAGE_AVAILABLE=`ec2-describe-images $IMAGE_ID --region ap-southeast-2 | awk '/BLOCKDEVICEMAPPING/{print $6}'`
+	if [ "$COUNTER" -gt 24 ]; then
+		echo "Quitting after 25 attempts"
+		break
+	else
+		sleep 5s
+		echo "Checking for image availability"
+		IMAGE_AVAILABLE=`ec2-describe-images $IMAGE_ID --region ap-southeast-2 | awk '/BLOCKDEVICEMAPPING/{print $6}'`
+		let COUNTER=COUNTER+1
+	fi
 done
 
 as-create-launch-config $1-lc --region ap-southeast-2 --image-id $IMAGE_ID --instance-type t1.micro --key lukeaaus --group cidemo
