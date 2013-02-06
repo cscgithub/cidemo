@@ -14,7 +14,7 @@ done
 
 export IMAGE_ID=`ec2-create-image --region ap-southeast-2 -n $1 -d "Image for build $1" $INSTANCE_ID | awk '/IMAGE/{print $2}'`
 export IMAGE_AVAILABLE="false"
-while [ "$IMAGE_AVAILABLE" -ne "true" ]; do
+while [ "$IMAGE_AVAILABLE" != "true" ]; do
 	sleep 5s
 	echo "Waiting for image to become available"
 	IMAGE_AVAILABLE=`ec2-describe-images $IMAGE_ID --region ap-southeast-2 | awk '/BLOCKDEVICEMAPPING/{print $6}'`
