@@ -38,3 +38,12 @@ mon-put-metric-alarm $1-test-HighCPU --region ap-southeast-2 --comparison-operat
 export SCALE_DOWN_ARN=`as-put-scaling-policy $1-test-ScaleDown --region ap-southeast-2 --auto-scaling-group $1-test-asg --adjustment=-1 --type ChangeInCapacity --cooldown 60`
 mon-put-metric-alarm $1-test-LowCPU --region ap-southeast-2 --comparison-operator LessThanThreshold --evaluation-periods 1 --metric-name CPUUtilization --namespace "AWS/EC2" --period 60 --statistic Average --threshold 40 --alarm-actions $SCALE_DOWN_ARN --dimensions "AutoScalingGroupName=$1-test-asg"
 as-execute-policy $1-test-ScaleUp --auto-scaling-group $1-test-asg --region ap-southeast-2 --no-honor-cooldown
+
+COUNTER=0
+while [ -z "$(elb-describe-instance-health cidemo-test-lb --region ap-southeast-2)" ]; do
+	echo "Checking for healthy test instance availability"
+	if [ "$COUNTER" -gt 24 ]; then
+		echo "Quitting after 25 attempts"
+		exit 1
+	fi
+done
