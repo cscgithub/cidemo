@@ -40,10 +40,11 @@ mon-put-metric-alarm $1-test-LowCPU --region ap-southeast-2 --comparison-operato
 as-execute-policy $1-test-ScaleUp --auto-scaling-group $1-test-asg --region ap-southeast-2 --no-honor-cooldown
 
 COUNTER=0
-while [ -z "$(elb-describe-instance-health cidemo-test-lb --region ap-southeast-2)" ]; do
+while [ -z "$(elb-describe-instance-health cidemo-test-lb --region ap-southeast-2 | grep InService)" ]; do
 	echo "Checking for healthy test instance availability"
 	if [ "$COUNTER" -gt 24 ]; then
 		echo "Quitting after 25 attempts"
 		exit 1
 	fi
+	sleep 5s
 done
