@@ -42,9 +42,10 @@ as-execute-policy $1-test-ScaleUp --auto-scaling-group $1-test-asg --region ap-s
 COUNTER=0
 while [ -z "$(elb-describe-instance-health cidemo-test-lb --region ap-southeast-2 | grep InService)" ]; do
     echo "Checking for healthy test instance availability"
-    if [ "$COUNTER" -gt 24 ]; then
+    if [[ "$COUNTER" -gt 24 ]]; then
         echo "Quitting after 25 attempts"
         exit 1
     fi
+    let COUNTER=COUNTER+1
     sleep 10s
 done
