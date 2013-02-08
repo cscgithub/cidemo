@@ -341,11 +341,7 @@
             "InstanceType":{
                "Ref":"InstanceType"
             },
-            "SecurityGroups":[
-               {
-                  "Ref":"FrontendGroup"
-               }
-            ],
+            "SecurityGroups": [ "cidemo" ],
             "KeyName":{
                "Ref":"KeyName"
             },
@@ -408,46 +404,6 @@
             }
          }
       },
-      "IPAddress":{
-         "Type":"AWS::EC2::EIP"
-      },
-      "IPAssoc":{
-         "Type":"AWS::EC2::EIPAssociation",
-         "Properties":{
-            "InstanceId":{
-               "Ref":"WebServer"
-            },
-            "EIP":{
-               "Ref":"IPAddress"
-            }
-         }
-      },
-      "FrontendGroup":{
-         "Type":"AWS::EC2::SecurityGroup",
-         "Properties":{
-            "GroupDescription":"Enable SSH and access to Apache and Tomcat",
-            "SecurityGroupIngress":[
-               {
-                  "IpProtocol":"tcp",
-                  "FromPort":"22",
-                  "ToPort":"22",
-                  "CidrIp":"0.0.0.0/0"
-               },
-               {
-                  "IpProtocol":"tcp",
-                  "FromPort":"80",
-                  "ToPort":"80",
-                  "CidrIp":"0.0.0.0/0"
-               },
-               {
-                  "IpProtocol":"tcp",
-                  "FromPort":"8080",
-                  "ToPort":"8080",
-                  "CidrIp":"0.0.0.0/0"
-               }
-            ]
-         }
-      },
       "WaitHandle":{
          "Type":"AWS::CloudFormation::WaitConditionHandle"
       },
@@ -463,11 +419,6 @@
       }
    },
    "Outputs":{
-      "InstanceIPAddress":{
-         "Value":{
-            "Ref":"IPAddress"
-         }
-      },
       "SecretAccessKey":{
          "Value":{
             "Fn::GetAtt":[
